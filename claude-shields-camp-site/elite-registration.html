@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Camp Registration | Claude Shields Basketball Camp</title>
+<meta name="description" content="Complete registration and recruiting profile details for Claude Shields Basketball Camp Elite Camp after you pay online.">
+<link rel="icon" href="assets/favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/logo.png" alt="Claude Shields Basketball Camp logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="elite-camp.html">Elite Camp</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="elite-registration.html" class="btn btn-outline">Register</a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<section class="hero hero-small">
+  <img class="hero-bg" src="assets/photos/DSC03506.jpg" alt="Coach talking with a William Peace University player">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="eyebrow" style="background:rgba(255,255,255,0.15); color:#fff;">Step 1 of 2</span>
+    <h1>Elite Camp Registration</h1>
+    <p class="lead">Start here &mdash; please fill out this form to begin your registration. Once this is complete, we'll take you straight to secure payment to lock in your spot.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container" style="max-width:820px;">
+
+    <form id="camper-form" action="https://formspree.io/f/xjybvrza" method="POST">
+      <input type="hidden" name="_subject" value="New Elite Camp Registration — Claude Shields Basketball Camp">
+      <input type="hidden" name="Session" data-key="elite" value="Elite Camp — Oct 10, 2026">
+
+      <div class="form-section">
+        <h3>Participant</h3>
+        <p class="hint">Tell us about the player.</p>
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Legal Full Name <span class="req">*</span></label>
+            <input type="text" id="name" name="Camper Name" required>
+          </div>
+          <div class="field">
+            <label for="dob">Date of Birth <span class="req">*</span></label>
+            <input type="date" id="dob" name="Date of Birth" required>
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="grad-year">High School Graduation Year <span class="req">*</span></label>
+            <input type="number" id="grad-year" name="High School Graduation Year" min="2026" max="2033" placeholder="e.g. 2028" required>
+          </div>
+          <div class="field">
+            <label for="height">Height</label>
+            <input type="text" id="height" name="Height" placeholder="e.g. 6'2&quot;">
+          </div>
+          <div class="field">
+            <label for="weight">Weight</label>
+            <input type="text" id="weight" name="Weight" placeholder="e.g. 165 lbs">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Gender <span class="req">*</span></label>
+            <div class="radio-group">
+              <label><input type="radio" name="Gender" value="Male" required> Male</label>
+              <label><input type="radio" name="Gender" value="Female" required> Female</label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="shirt">T-Shirt Size <span class="req">*</span></label>
+            <select id="shirt" name="T-Shirt Size" required>
+              <option value="">Select size&hellip;</option>
+              <option>Adult Small</option>
+              <option>Adult Medium</option>
+              <option>Adult Large</option>
+              <option>Adult X-Large</option>
+              <option>Adult XX-Large</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Contact Information</h3>
+        <p class="hint">Where you'd like camp and recruiting updates sent.</p>
+        <div class="form-row">
+          <div class="field">
+            <label for="address">Home Address <span class="req">*</span></label>
+            <input type="text" id="address" name="Address" required>
+          </div>
+          <div class="field">
+            <label for="cell">Cell Phone <span class="req">*</span></label>
+            <input type="tel" id="cell" name="Cell Phone" required>
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="city">City <span class="req">*</span></label>
+            <input type="text" id="city" name="City" required>
+          </div>
+          <div class="field">
+            <label for="state">State <span class="req">*</span></label>
+            <input type="text" id="state" name="State" value="NC" required>
+          </div>
+          <div class="field">
+            <label for="zip">Zip <span class="req">*</span></label>
+            <input type="text" id="zip" name="Zip" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="pemail">Email Address <span class="req">*</span></label>
+            <input type="email" id="pemail" name="Email Address" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Family</h3>
+        <p class="hint">Helps our staff and recruiting office reach the right people.</p>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="pg1-name">Parent/Guardian 1 Name</label>
+            <input type="text" id="pg1-name" name="Parent/Guardian 1 Name">
+          </div>
+          <div class="field">
+            <label for="pg1-phone">Parent/Guardian 1 Phone</label>
+            <input type="tel" id="pg1-phone" name="Parent/Guardian 1 Phone">
+          </div>
+          <div class="field">
+            <label for="pg1-email">Parent/Guardian 1 Email</label>
+            <input type="email" id="pg1-email" name="Parent/Guardian 1 Email">
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="pg2-name">Parent/Guardian 2 Name</label>
+            <input type="text" id="pg2-name" name="Parent/Guardian 2 Name">
+          </div>
+          <div class="field">
+            <label for="pg2-phone">Parent/Guardian 2 Phone</label>
+            <input type="tel" id="pg2-phone" name="Parent/Guardian 2 Phone">
+          </div>
+          <div class="field">
+            <label for="pg2-email">Parent/Guardian 2 Email</label>
+            <input type="email" id="pg2-email" name="Parent/Guardian 2 Email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="siblings">Sibling(s) — Name(s) and Age(s)</label>
+            <input type="text" id="siblings" name="Siblings" placeholder="e.g. Sam (14), Riley (9)">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Academic Profile</h3>
+        <p class="hint">Optional, but this is what our coaching staff uses to get to know you as a recruit.</p>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="hs-name">High School</label>
+            <input type="text" id="hs-name" name="High School">
+          </div>
+          <div class="field">
+            <label for="hs-city">High School City/State</label>
+            <input type="text" id="hs-city" name="High School City/State">
+          </div>
+          <div class="field">
+            <label for="hs-phone">School Phone</label>
+            <input type="tel" id="hs-phone" name="School Phone">
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="class-rank">Class Rank</label>
+            <input type="text" id="class-rank" name="Class Rank">
+          </div>
+          <div class="field">
+            <label for="gpa">GPA</label>
+            <input type="text" id="gpa" name="GPA" placeholder="e.g. 3.8">
+          </div>
+          <div class="field">
+            <label for="student-type">Student Type</label>
+            <select id="student-type" name="Student Type">
+              <option value="">Select&hellip;</option>
+              <option>First Time in College</option>
+              <option>Transfer</option>
+              <option>Readmit</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="sat-math">SAT Math</label>
+            <input type="number" id="sat-math" name="SAT Math">
+          </div>
+          <div class="field">
+            <label for="sat-reading">SAT Reading</label>
+            <input type="number" id="sat-reading" name="SAT Critical Reading">
+          </div>
+          <div class="field">
+            <label for="sat-writing">SAT Writing</label>
+            <input type="number" id="sat-writing" name="SAT Writing">
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="sat-total">SAT Total</label>
+            <input type="number" id="sat-total" name="SAT Total">
+          </div>
+          <div class="field">
+            <label for="act">ACT</label>
+            <input type="number" id="act" name="ACT">
+          </div>
+          <div class="field">
+            <label for="entry-term">Entry Term</label>
+            <select id="entry-term" name="Entry Term">
+              <option value="">Select&hellip;</option>
+              <option>Fall 2027</option>
+              <option>Spring 2028</option>
+              <option>Fall 2028</option>
+              <option>Spring 2029</option>
+              <option>Fall 2029</option>
+              <option>Spring 2030</option>
+              <option>Fall 2030</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="honors">Academic Honors</label>
+            <textarea id="honors" name="Academic Honors"></textarea>
+          </div>
+          <div class="field">
+            <label for="other-colleges">Other College Choices</label>
+            <textarea id="other-colleges" name="Other College Choices"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="transcripts">Transcripts</label>
+            <input type="text" id="transcripts" name="Transcripts" placeholder="Link, or note that you'll email them">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Athletic Profile</h3>
+        <p class="hint">This is the part our coaching staff reads closely.</p>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="position">Position</label>
+            <select id="position" name="Position">
+              <option value="">Select&hellip;</option>
+              <option>PG</option>
+              <option>SG</option>
+              <option>SF</option>
+              <option>PF</option>
+              <option>C</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tournaments">Tournaments Attending</label>
+            <input type="text" id="tournaments" name="Tournaments Attending">
+          </div>
+          <div class="field">
+            <label for="game-schedule">Game Schedule</label>
+            <input type="text" id="game-schedule" name="Game Schedule" placeholder="Link, or note that you'll email it">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="recruit-site">Recruiting Website</label>
+            <input type="url" id="recruit-site" name="Recruiting Website" placeholder="https://">
+          </div>
+          <div class="field">
+            <label for="youtube">YouTube / Highlight Link</label>
+            <input type="url" id="youtube" name="YouTube Link" placeholder="https://">
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="hs-coach-name">HS Coach Name</label>
+            <input type="text" id="hs-coach-name" name="HS Coach Name">
+          </div>
+          <div class="field">
+            <label for="hs-coach-phone">HS Coach Phone</label>
+            <input type="tel" id="hs-coach-phone" name="HS Coach Phone">
+          </div>
+          <div class="field">
+            <label for="hs-coach-email">HS Coach Email</label>
+            <input type="email" id="hs-coach-email" name="HS Coach Email">
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="aau-team">AAU Team Name</label>
+            <input type="text" id="aau-team" name="AAU Team Name">
+          </div>
+          <div class="field">
+            <label for="aau-coach-name">AAU Coach Name</label>
+            <input type="text" id="aau-coach-name" name="AAU Coach Name">
+          </div>
+          <div class="field">
+            <label for="aau-coach-phone">AAU Coach Phone</label>
+            <input type="tel" id="aau-coach-phone" name="AAU Coach Phone">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="aau-coach-email">AAU Coach Email</label>
+            <input type="email" id="aau-coach-email" name="AAU Coach Email">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Health Information</h3>
+        <p class="hint">Shared only with camp staff to keep participants safe.</p>
+        <div class="form-row">
+          <div class="field">
+            <label for="allergies">Any food allergies? Please list</label>
+            <textarea id="allergies" name="Food Allergies" placeholder="e.g. None, or list allergies"></textarea>
+          </div>
+          <div class="field">
+            <label for="medical">Medical conditions: please explain</label>
+            <textarea id="medical" name="Medical Conditions" placeholder="e.g. None, or list conditions"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Emergency Contacts</h3>
+        <p class="hint">At least one is required; a second is recommended.</p>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="e1name">Emergency Contact Name <span class="req">*</span></label>
+            <input type="text" id="e1name" name="Emergency Contact 1 Name" required>
+          </div>
+          <div class="field">
+            <label for="e1rel">Relationship <span class="req">*</span></label>
+            <input type="text" id="e1rel" name="Emergency Contact 1 Relationship" required>
+          </div>
+          <div class="field">
+            <label for="e1phone">Phone <span class="req">*</span></label>
+            <input type="tel" id="e1phone" name="Emergency Contact 1 Phone" required>
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label for="e2name">Emergency Contact 2 Name</label>
+            <input type="text" id="e2name" name="Emergency Contact 2 Name">
+          </div>
+          <div class="field">
+            <label for="e2rel">Relationship</label>
+            <input type="text" id="e2rel" name="Emergency Contact 2 Relationship">
+          </div>
+          <div class="field">
+            <label for="e2phone">Phone</label>
+            <input type="tel" id="e2phone" name="Emergency Contact 2 Phone">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Insurance</h3>
+        <p class="hint">In case a participant needs medical attention during camp.</p>
+        <div class="form-row">
+          <div class="field">
+            <label for="ins-co">Insurance Company <span class="req">*</span></label>
+            <input type="text" id="ins-co" name="Insurance Company" required>
+          </div>
+          <div class="field">
+            <label for="ins-phone">Insurance Phone <span class="req">*</span></label>
+            <input type="tel" id="ins-phone" name="Insurance Phone" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="ins-policy">Policy #</label>
+            <input type="text" id="ins-policy" name="Policy Number">
+          </div>
+          <div class="field">
+            <label for="ins-holder">Policy Holder</label>
+            <input type="text" id="ins-holder" name="Policy Holder">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <label class="checkbox-field">
+          <input type="checkbox" name="Waiver Acknowledged" value="Yes" required>
+          <span>I confirm the information above is accurate and I understand camp staff will use it solely to care for participants during Claude Shields Basketball Camp Elite Camp.</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Submit Registration</button>
+      <p class="form-submit-note">Questions? Contact Drew Shaw at <a href="mailto:anshaw@peace.edu">anshaw@peace.edu</a></p>
+    </form>
+
+    <div id="form-success">
+      <h2>Info Received!</h2>
+      <p data-success-message>Thanks! Last step &mdash; complete payment to lock in your spot.</p>
+      <a href="#" data-pay-btn class="btn btn-primary" style="display:none; margin-bottom:14px;">Continue to Payment</a>
+      <div><a href="index.html" class="btn btn-outline">Back to Home</a></div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo.png" alt="Claude Shields Basketball Camp logo">
+          <span>Claude Shields<br>Basketball Camp</span>
+        </div>
+        <p style="color:#9aa19d; font-size:0.9rem;">William Peace University &middot; Raleigh, North Carolina</p>
+      </div>
+      <div>
+        <h4>CAMP</h4>
+        <ul class="footer-links">
+          <li><a href="elite-camp.html">Elite Camp</a></li>
+          <li><a href="elite-registration.html">Elite Camp Registration</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>CONTACT</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:anshaw@peace.edu">anshaw@peace.edu</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span data-year>2026</span> Claude Shields Basketball Camp. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js"></script>
+</body>
+</html>

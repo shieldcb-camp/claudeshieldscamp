@@ -1,0 +1,9 @@
+{
+  "name": "claude-shields-basketball-camp",
+  "private": true,
+  "type": "module",
+  "description": "Claude Shields Basketball Camp website. Static site + one Netlify Function for Stripe checkout.",
+  "dependencies": {
+    "stripe": "latest"
+  }
+}
