@@ -1,157 +1,567 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elite Camp | Claude Shields Basketball Camp</title>
-<meta name="description" content="Claude Shields Basketball Camp Elite Camp — October 10, 2026 at William Peace University. For boys grades 11-12.">
-<link rel="icon" href="assets/favicon.ico">
-<link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
+/* Claude Shields Basketball Camp â€” shared styles */
 
-<header class="site-header">
-  <nav class="nav">
-    <a href="index.html" class="nav-brand">
-      <img src="assets/logo.png" alt="Claude Shields Basketball Camp logo">
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#sessions">Sessions &amp; Pricing</a></li>
-      <li><a href="elite-camp.html">Elite Camp</a></li>
-      <li><a href="elite-registration.html">Elite Camp Registration</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a href="elite-registration.html" class="btn btn-outline">Register</a>
-      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
-</header>
+:root {
+  --green: #035e40;
+  --green-dark: #024a33;
+  --green-light: #e7f2ee;
+  --black: #1a1a1a;
+  --white: #ffffff;
+  --cream: #faf9f6;
+  --gray: #6b6f6d;
+  --border: #e3e1da;
+  --radius: 10px;
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.14);
+  --max-width: 1160px;
+}
 
-<section class="hero hero-small">
-  <img class="hero-bg" src="assets/photos/DSC03506.jpg" alt="Coach talking with a William Peace University player">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <span class="eyebrow" style="background:rgba(255,255,255,0.15); color:#fff;">Boys &middot; Grades 11&ndash;12</span>
-    <h1>Elite Camp</h1>
-    <p class="lead">A one-day camp for top-tier North Carolina talent &mdash; competitive 5-on-5 runs, fundamentals, and a first-hand look at what a college practice is really like. Come join us!</p>
-  </div>
-</section>
+* { box-sizing: border-box; }
 
-<section class="section-tight">
-  <div class="container">
-    <div class="grid-2" style="align-items:flex-start; gap:40px;">
-      <div>
-        <h2>Event Description</h2>
-        <p>The staff at William Peace University (WPU) is proud to hold our annual Elite Camp on <strong>October 10, 2026</strong>. This is a great chance for prospective student-athletes to showcase their talents, display their work ethic, learn about the recruiting process, and get better acquainted with the staff at Peace.</p>
-        <p>Our camp is designed for top-tier players in the state of North Carolina. The session includes a full college practice, including a sneak peek into what a college film session looks like. Our up-tempo style of basketball is ingrained into every single drill we run &mdash; attendees will see first-hand what being a college basketball player is all about. Come join our program for a day!</p>
-        <p>We'll offer campus tours before camp begins &mdash; strongly recommended for anyone interested in attending Peace. Our campus sits right in the heart of the state's capital city, nestled next to The Village District and Seaboard Station &mdash; the only co-ed Division III program the Research Triangle has to offer.</p>
+html { scroll-behavior: smooth; }
 
-        <h3 style="margin-top:32px;">Contact us if you're interested in:</h3>
-        <ul class="check-list">
-          <li>Becoming a hooper &gt; being a robot</li>
-          <li>Wanting to get your license to let it fly</li>
-          <li>Learning more about the college recruiting process</li>
-          <li>Experiencing the structure of a college practice</li>
-          <li>Competing to win against some of the best talent in the "Hoop State"</li>
-        </ul>
-      </div>
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: var(--black);
+  background: var(--cream);
+  line-height: 1.55;
+}
 
-      <div>
-        <div class="session-card" id="register">
-          <div class="head">
-            <h3>2026 Elite Camp</h3>
-            <span class="dates">Oct 10, 2026</span>
-          </div>
-          <div class="body">
-            <div class="session-facts">
-              <div class="fact"><div class="label">Who</div><div class="value">Boys, 11th&ndash;12th (Fall 2026)</div></div>
-              <div class="fact"><div class="label">Time</div><div class="value">12:00 &ndash; 2:30 PM</div></div>
-              <div class="fact"><div class="label">Location</div><div class="value">Hermann Athletic Center</div></div>
-              <div class="fact"><div class="label">Spots</div><div class="value">Limited</div></div>
-            </div>
-            <div class="price-box">
-              <div class="reg-status"><span class="dot"></span> Registration open</div>
-              <div class="price-row">
-                <span class="amount">$62.10</span>
-              </div>
-              <div class="note">Includes processing fee. Spots are limited &mdash; register early.</div>
-            </div>
-            <a class="btn btn-primary btn-block" href="elite-registration.html">Register for Elite Camp</a>
-            <p class="small text-center" style="margin-top:14px; margin-bottom:0;">
-              You'll fill out a quick registration form first, then be sent straight to secure payment.
-            </p>
-            <p class="small text-center" style="margin-top:10px; margin-bottom:0;">
-              Questions? Contact Drew Shaw at <a href="mailto:anshaw@peace.edu">anshaw@peace.edu</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+h1, h2, h3, h4 {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+  text-transform: uppercase;
+  color: var(--black);
+}
 
-<section class="section-alt">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">See The Style</span>
-      <h2>How we play</h2>
-    </div>
-    <div class="video-row">
-      <video class="camp-video-wide" poster="assets/videos/elite1-poster.jpg" muted loop playsinline autoplay preload="none">
-        <source src="assets/videos/elite1.mp4" type="video/mp4">
-      </video>
-      <video class="camp-video-wide" poster="assets/videos/elite2-poster.jpg" muted loop playsinline autoplay preload="none">
-        <source src="assets/videos/elite2.mp4" type="video/mp4">
-      </video>
-      <video class="camp-video-wide" poster="assets/videos/elite3-poster.jpg" muted loop playsinline autoplay preload="none">
-        <source src="assets/videos/elite3.mp4" type="video/mp4">
-      </video>
-    </div>
-  </div>
-</section>
+h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.05; }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); line-height: 1.1; }
+h3 { font-size: 1.25rem; }
 
-<section class="section-green">
-  <div class="container text-center">
-    <span class="eyebrow" style="background:rgba(255,255,255,0.15); color:#fff;">Location</span>
-    <h2>Hermann Athletic Center</h2>
-    <p style="max-width:600px; margin:0 auto;">On the campus of William Peace University, Raleigh, NC &mdash; right in the heart of the state's capital city, next to The Village District and Seaboard Station.</p>
-  </div>
-</section>
+p { margin: 0 0 1em; color: #333; }
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">
-          <img src="assets/logo.png" alt="Claude Shields Basketball Camp logo">
-          <span>Claude Shields<br>Basketball Camp</span>
-        </div>
-        <p style="color:#9aa19d; font-size:0.9rem;">William Peace University &middot; Raleigh, North Carolina</p>
-      </div>
-      <div>
-        <h4>CAMP</h4>
-        <ul class="footer-links">
-          <li><a href="index.html#sessions">Sessions &amp; Pricing</a></li>
-          <li><a href="elite-camp.html">Elite Camp</a></li>
-          <li><a href="elite-registration.html">Elite Camp Registration</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>CONTACT</h4>
-        <ul class="footer-links">
-          <li><a href="mailto:cbshields@peace.edu">cbshields@peace.edu</a></li>
-          <li><a href="tel:9195082331">919-508-2331</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; <span data-year>2026</span> Claude Shields Basketball Camp. All rights reserved.</span>
-    </div>
-  </div>
-</footer>
+a { color: var(--green); text-decoration: none; }
 
-<script src="assets/script.js"></script>
-</body>
-</html>
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: var(--green-light);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn-primary {
+  background: var(--green);
+  color: var(--white);
+}
+.btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn-outline {
+  background: transparent;
+  border-color: var(--black);
+  color: var(--black);
+}
+.btn-outline:hover { background: var(--black); color: var(--white); }
+.btn-light {
+  background: var(--white);
+  color: var(--green);
+}
+.btn-light:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn-block { width: 100%; }
+.btn:disabled, .btn.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Header / Nav */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+.nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: var(--black);
+}
+.nav-brand img { height: 52px; width: auto; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  color: var(--black);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--green); border-bottom-color: var(--green); }
+.nav-cta { display: flex; align-items: center; gap: 18px; }
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-toggle span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: var(--black);
+  margin: 5px 0;
+  border-radius: 2px;
+}
+
+@media (max-width: 860px) {
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    display: none;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; padding: 14px 24px; border-bottom: 1px solid var(--border); }
+  .nav-cta .btn-outline { display: none; }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  color: var(--white);
+  background: var(--black);
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(2,20,14,0.75) 65%, rgba(2,20,14,0.92) 100%);
+}
+.hero-content {
+  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 110px 24px 90px;
+}
+.hero-content h1 { color: var(--white); max-width: 760px; }
+.hero-content p.lead {
+  color: #eef5f1;
+  font-size: 1.1rem;
+  max-width: 560px;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 26px; }
+.hero-small { padding: 70px 24px 60px; }
+
+/* Sections */
+section { padding: 72px 0; }
+.section-tight { padding: 48px 0; }
+.section-alt { background: var(--white); }
+.section-green { background: var(--green); color: var(--white); }
+.section-green h2, .section-green h3 { color: var(--white); }
+.section-green p { color: #eaf3ef; }
+.section-head { max-width: 680px; margin: 0 auto 40px; text-align: center; }
+.section-head.left { margin: 0 0 40px; text-align: left; }
+
+/* Grid helpers */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 860px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 30px;
+  box-shadow: var(--shadow);
+}
+.value-card { text-align: center; padding: 34px 26px; }
+.value-card .icon {
+  width: 56px; height: 56px; margin: 0 auto 18px;
+  background: var(--green-light); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* Program cards on homepage */
+.program-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  height: 100%;
+}
+.program-card img { height: 220px; object-fit: cover; }
+.program-card .body { padding: 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.program-card .body p { flex: 1; }
+
+/* Lists */
+.check-list { list-style: none; margin: 0; padding: 0; }
+.check-list li {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  color: #333;
+}
+.check-list li:last-child { border-bottom: none; }
+.check-list li::before {
+  content: "";
+  flex: none;
+  width: 20px; height: 20px;
+  margin-top: 3px;
+  border-radius: 50%;
+  background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8.5L6.2 11.5L13 4.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/11px no-repeat;
+}
+
+/* Photo gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.gallery a:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery a:nth-child(1) img { height: 100%; }
+@media (max-width: 860px) {
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+  .gallery a:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+  .gallery a:nth-child(1) img { height: 220px; }
+}
+
+/* Session / pricing cards */
+.session-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.session-card .head {
+  background: var(--black);
+  color: var(--white);
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.session-card .head h3 { color: var(--white); margin: 0; }
+.session-card .head .dates { font-weight: 700; color: #cfe9de; }
+.session-card .body { padding: 28px; }
+.session-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.fact { }
+.fact .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); font-weight: 700; margin-bottom: 4px; }
+.fact .value { font-weight: 700; font-size: 1.02rem; }
+
+.price-box {
+  background: var(--green-light);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 22px;
+}
+.price-box .price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.price-box .amount { font-size: 2.1rem; font-weight: 900; color: var(--green); }
+.price-box .amount .strike { font-size: 1.1rem; color: var(--gray); text-decoration: line-through; font-weight: 600; margin-right: 8px; }
+.price-box .note { font-size: 0.85rem; color: var(--gray); margin-top: 6px; }
+.badge {
+  display: inline-block;
+  background: var(--green);
+  color: var(--white);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.badge-outline {
+  display: inline-block;
+  border: 1.5px solid var(--gray);
+  color: var(--gray);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* Callout / alert box */
+.callout {
+  border-left: 4px solid var(--green);
+  background: var(--green-light);
+  padding: 18px 22px;
+  border-radius: 6px;
+  margin: 0 0 24px;
+}
+.callout.warn { border-left-color: #b3541e; background: #fbf1e8; }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { display: block; margin-bottom: 4px; }
+
+/* Two-col info */
+.info-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+.info-strip .item .num { font-size: 1.7rem; font-weight: 900; color: var(--green); }
+.info-strip .item .label { font-size: 0.85rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.04em; }
+@media (max-width: 700px) {
+  .info-strip { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Camp highlight videos */
+.video-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.camp-video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--black);
+  box-shadow: var(--shadow);
+}
+@media (max-width: 700px) {
+  .video-row { grid-template-columns: 1fr; }
+  .camp-video { max-width: 320px; margin: 0 auto; }
+}
+
+/* Widescreen highlight videos (broadcast/game footage, e.g. Elite Camp) */
+.camp-video-wide {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--black);
+  box-shadow: var(--shadow);
+}
+@media (max-width: 700px) {
+  .video-row .camp-video-wide { max-width: none; }
+}
+
+/* Footer */
+.site-footer {
+  background: var(--black);
+  color: #cfd3d1;
+  padding: 56px 0 26px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 40px;
+}
+.footer-grid h4 { color: var(--white); font-size: 0.85rem; letter-spacing: 0.08em; margin-bottom: 16px; }
+.footer-grid a { color: #cfd3d1; }
+.footer-grid a:hover { color: var(--white); }
+.footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.footer-brand img { height: 44px; }
+.footer-brand span { font-weight: 900; text-transform: uppercase; color: var(--white); }
+.footer-links { list-style: none; margin: 0; padding: 0; }
+.footer-links li { margin-bottom: 10px; font-size: 0.92rem; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 22px;
+  font-size: 0.8rem;
+  color: #8b8f8c;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+@media (max-width: 760px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+/* Registration status widget */
+.reg-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+.reg-status .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
+
+/* Camper info form */
+.form-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.form-section h3 {
+  margin-bottom: 4px;
+}
+.form-section .hint {
+  color: var(--gray);
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.form-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.form-row + .form-row { margin-top: 18px; }
+@media (max-width: 700px) {
+  .form-row, .form-row.cols-3 { grid-template-columns: 1fr; }
+}
+.field label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--black);
+}
+.field .req { color: #b3541e; }
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="tel"],
+.field input[type="date"],
+.field input[type="number"],
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--black);
+  background: var(--cream);
+}
+.field textarea { resize: vertical; min-height: 70px; }
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--green);
+  background: var(--white);
+}
+.radio-group { display: flex; gap: 20px; flex-wrap: wrap; padding-top: 4px; }
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 0.92rem;
+  margin: 0;
+  cursor: pointer;
+}
+.radio-group input { width: 16px; height: 16px; accent-color: var(--green); }
+.checkbox-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #333;
+}
+.checkbox-field input { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--green); flex: none; }
+.form-submit-note { text-align: center; color: var(--gray); font-size: 0.85rem; margin-top: 16px; }
+#form-success {
+  display: none;
+  text-align: center;
+  padding: 48px 24px;
+}
+#form-success h2 { color: var(--green); }
+
+/* Utility */
+.text-center { text-align: center; }
+.mt-0 { margin-top: 0; }
+.small { font-size: 0.85rem; color: var(--gray); }
