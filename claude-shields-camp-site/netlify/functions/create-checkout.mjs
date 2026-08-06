@@ -23,7 +23,7 @@ const PRICE_IDS = {
   session1Regular: "price_REPLACE_SESSION1_REGULAR",
   session2Early:   "price_REPLACE_SESSION2_EARLY",
   session2Regular: "price_REPLACE_SESSION2_REGULAR",
-  elite:           "price_1U19AsHwd68VaJ2HFF9e4MJ1"
+  elite:           "price_1U1OWeHk8x31lRhs0Rg71Qpc"
 };
 
 // Same registration window as the rest of the site (kept in sync
