@@ -1,5 +1,7 @@
-/* Claude Shields Basketball Camp — shared styles */
 
+Style code · TXT
+/* Claude Shields Basketball Camp — shared styles */
+ 
 :root {
   --green: #035e40;
   --green-dark: #024a33;
@@ -14,11 +16,11 @@
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.14);
   --max-width: 1160px;
 }
-
+ 
 * { box-sizing: border-box; }
-
+ 
 html { scroll-behavior: smooth; }
-
+ 
 body {
   margin: 0;
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -26,7 +28,7 @@ body {
   background: var(--cream);
   line-height: 1.55;
 }
-
+ 
 h1, h2, h3, h4 {
   font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
   font-weight: 900;
@@ -35,23 +37,23 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
   color: var(--black);
 }
-
+ 
 h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.05; }
 h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); line-height: 1.1; }
 h3 { font-size: 1.25rem; }
-
+ 
 p { margin: 0 0 1em; color: #333; }
-
+ 
 a { color: var(--green); text-decoration: none; }
-
+ 
 img { max-width: 100%; display: block; }
-
+ 
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
 }
-
+ 
 .eyebrow {
   display: inline-block;
   font-weight: 800;
@@ -64,7 +66,7 @@ img { max-width: 100%; display: block; }
   border-radius: 999px;
   margin-bottom: 14px;
 }
-
+ 
 /* Buttons */
 .btn {
   display: inline-flex;
@@ -103,7 +105,7 @@ img { max-width: 100%; display: block; }
   cursor: not-allowed;
   pointer-events: none;
 }
-
+ 
 /* Header / Nav */
 .site-header {
   position: sticky;
@@ -165,7 +167,7 @@ img { max-width: 100%; display: block; }
   margin: 5px 0;
   border-radius: 2px;
 }
-
+ 
 @media (max-width: 860px) {
   .nav-toggle { display: block; }
   .nav-links {
@@ -185,7 +187,7 @@ img { max-width: 100%; display: block; }
   .nav-links a { display: block; padding: 14px 24px; border-bottom: 1px solid var(--border); }
   .nav-cta .btn-outline { display: none; }
 }
-
+ 
 /* Hero */
 .hero {
   position: relative;
@@ -220,7 +222,7 @@ img { max-width: 100%; display: block; }
 }
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 26px; }
 .hero-small { padding: 70px 24px 60px; }
-
+ 
 /* Sections */
 section { padding: 72px 0; }
 .section-tight { padding: 48px 0; }
@@ -230,7 +232,7 @@ section { padding: 72px 0; }
 .section-green p { color: #eaf3ef; }
 .section-head { max-width: 680px; margin: 0 auto 40px; text-align: center; }
 .section-head.left { margin: 0 0 40px; text-align: left; }
-
+ 
 /* Grid helpers */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -238,7 +240,7 @@ section { padding: 72px 0; }
   .grid-2 { grid-template-columns: 1fr; }
   .grid-3 { grid-template-columns: 1fr; }
 }
-
+ 
 /* Cards */
 .card {
   background: var(--white);
@@ -254,7 +256,7 @@ section { padding: 72px 0; }
   display: flex; align-items: center; justify-content: center;
   font-size: 1.5rem;
 }
-
+ 
 /* Program cards on homepage */
 .program-card {
   display: flex;
@@ -269,7 +271,7 @@ section { padding: 72px 0; }
 .program-card img { height: 220px; object-fit: cover; }
 .program-card .body { padding: 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .program-card .body p { flex: 1; }
-
+ 
 /* Lists */
 .check-list { list-style: none; margin: 0; padding: 0; }
 .check-list li {
@@ -288,7 +290,7 @@ section { padding: 72px 0; }
   border-radius: 50%;
   background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8.5L6.2 11.5L13 4.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/11px no-repeat;
 }
-
+ 
 /* Photo gallery */
 .gallery {
   display: grid;
@@ -308,7 +310,7 @@ section { padding: 72px 0; }
   .gallery a:nth-child(1) { grid-column: span 2; grid-row: span 1; }
   .gallery a:nth-child(1) img { height: 220px; }
 }
-
+ 
 /* Session / pricing cards */
 .session-card {
   background: var(--white);
@@ -339,7 +341,7 @@ section { padding: 72px 0; }
 .fact { }
 .fact .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); font-weight: 700; margin-bottom: 4px; }
 .fact .value { font-weight: 700; font-size: 1.02rem; }
-
+ 
 .price-box {
   background: var(--green-light);
   border-radius: var(--radius);
@@ -372,7 +374,7 @@ section { padding: 72px 0; }
   padding: 3px 10px;
   border-radius: 999px;
 }
-
+ 
 /* Callout / alert box */
 .callout {
   border-left: 4px solid var(--green);
@@ -384,7 +386,7 @@ section { padding: 72px 0; }
 .callout.warn { border-left-color: #b3541e; background: #fbf1e8; }
 .callout p:last-child { margin-bottom: 0; }
 .callout strong { display: block; margin-bottom: 4px; }
-
+ 
 /* Two-col info */
 .info-strip {
   display: grid;
@@ -397,7 +399,7 @@ section { padding: 72px 0; }
 @media (max-width: 700px) {
   .info-strip { grid-template-columns: repeat(2, 1fr); }
 }
-
+ 
 /* Camp highlight videos */
 .video-row {
   display: grid;
@@ -416,7 +418,20 @@ section { padding: 72px 0; }
   .video-row { grid-template-columns: 1fr; }
   .camp-video { max-width: 320px; margin: 0 auto; }
 }
-
+ 
+/* Widescreen highlight videos (broadcast/game footage, e.g. Elite Camp) */
+.camp-video-wide {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--black);
+  box-shadow: var(--shadow);
+}
+@media (max-width: 700px) {
+  .video-row .camp-video-wide { max-width: none; }
+}
+ 
 /* Footer */
 .site-footer {
   background: var(--black);
@@ -450,7 +465,7 @@ section { padding: 72px 0; }
 @media (max-width: 760px) {
   .footer-grid { grid-template-columns: 1fr; }
 }
-
+ 
 /* Registration status widget */
 .reg-status {
   display: flex;
@@ -462,7 +477,7 @@ section { padding: 72px 0; }
   margin-bottom: 10px;
 }
 .reg-status .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
-
+ 
 /* Camper info form */
 .form-section {
   background: var(--white);
@@ -547,8 +562,9 @@ section { padding: 72px 0; }
   padding: 48px 24px;
 }
 #form-success h2 { color: var(--green); }
-
+ 
 /* Utility */
 .text-center { text-align: center; }
 .mt-0 { margin-top: 0; }
 .small { font-size: 0.85rem; color: var(--gray); }
+ 
