@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
           revealSuccess();
           setSuccessMessage("Info received — creating your secure payment link…", null);
 
-          return fetch("/api/create-checkout", {
+          return fetch("/api/create-checkout-v2", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ session: sessionValue, camperName: camperName })
