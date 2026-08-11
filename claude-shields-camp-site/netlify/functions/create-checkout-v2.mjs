@@ -37,6 +37,16 @@ const PRICE_IDS = {
 const REG_OPENS  = new Date("2027-01-01T00:00:00-05:00");
 const EARLY_ENDS = new Date("2027-01-31T23:59:59-05:00");
 
+// Kids Camp hard cap per session — Elite Camp has no cap enforced here.
+// This replaces what Ryzer used to do automatically: once a session hits
+// this many completed (paid) registrations, new registrants are told the
+// session is full instead of being sent to payment. Because their full
+// Camper Info Form was already saved to Formspree in the step just before
+// this function is called, that submission *is* their waitlist entry —
+// no separate waitlist form needed. Just re-check that inbox/spreadsheet
+// when a spot opens up.
+const KIDS_CAMP_CAP = 120;
+
 function priceIdForSession(sessionKey) {
   if (sessionKey === "elite") return PRICE_IDS.elite;
 
@@ -47,6 +57,29 @@ function priceIdForSession(sessionKey) {
   if (sessionKey === "session-1") return PRICE_IDS["session1" + tier];
   if (sessionKey === "session-2") return PRICE_IDS["session2" + tier];
   return null;
+}
+
+// Counts completed (paid) Checkout Sessions tagged with this session key,
+// regardless of which price tier (early/regular) they paid under. Stops
+// early once it reaches the cap — no need to keep paginating past that.
+// Note: Stripe's Search API has a short indexing delay (usually just a
+// few seconds), so there's a small chance two people right at the cap
+// boundary could both slip through — a minor, acceptable edge case, and
+// the same kind of overbooking risk any registration system has.
+async function countPaidRegistrations(sessionKey) {
+  let count = 0;
+  let page;
+  do {
+    const result = await stripe.checkout.sessions.search({
+      query: `status:'complete' AND metadata['session']:'${sessionKey}'`,
+      limit: 100,
+      page
+    });
+    count += result.data.length;
+    page = result.next_page;
+    if (count >= KIDS_CAMP_CAP) break;
+  } while (page);
+  return count;
 }
 
 export default async (req) => {
@@ -71,6 +104,27 @@ export default async (req) => {
       }),
       { status: 400, headers: { "Content-Type": "application/json" } }
     );
+  }
+
+  if (sessionKey === "session-1" || sessionKey === "session-2") {
+    try {
+      const paidCount = await countPaidRegistrations(sessionKey);
+      if (paidCount >= KIDS_CAMP_CAP) {
+        const sessionLabel = sessionKey === "session-1" ? "Session 1" : "Session 2";
+        return new Response(
+          JSON.stringify({
+            full: true,
+            message: sessionLabel + " is full! We've saved your info and added you to the waitlist — we'll reach out by email if a spot opens up."
+          }),
+          { status: 200, headers: { "Content-Type": "application/json" } }
+        );
+      }
+    } catch (err) {
+      // If the cap check itself fails (e.g. a transient Stripe API issue),
+      // fail open rather than blocking a legitimate registration — log it
+      // so it's visible in the function logs, but let checkout proceed.
+      console.error("Registration cap check error:", err);
+    }
   }
 
   try {
