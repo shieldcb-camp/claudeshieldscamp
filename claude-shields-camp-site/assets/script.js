@@ -184,7 +184,11 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(function (response) { return response.json().then(function (data) { return { ok: response.ok, data: data }; }); })
         .then(function (result) {
-          if (result.ok && result.data.url) {
+          if (result.data.full) {
+            // Session is at capacity — their form submission (already saved
+            // via Formspree above) doubles as their waitlist entry.
+            setSuccessMessage(result.data.message || "This session is full — we've added you to the waitlist.", null);
+          } else if (result.ok && result.data.url) {
             setSuccessMessage("Thanks! Last step — complete payment to lock in your spot.", result.data.url);
           } else {
             setSuccessMessage(result.data.error || "Thanks! We've saved your info. Please check back to complete payment, or contact cbshields@peace.edu.", null);
