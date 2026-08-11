@@ -157,9 +157,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Step 1: save the camper's info (Formspree — goes to your email).
+      var formData = new FormData(camperForm);
       fetch(camperForm.action, {
         method: "POST",
-        body: new FormData(camperForm),
+        body: formData,
         headers: { Accept: "application/json" }
       })
         .then(function (response) {
@@ -175,6 +176,18 @@ document.addEventListener("DOMContentLoaded", function () {
           // single-use Stripe Checkout Session from our serverless function.
           revealSuccess();
           setSuccessMessage("Info received — creating your secure payment link…", null);
+
+          // Also log this registration into the Google Sheet, in parallel.
+          // Fire-and-forget — never let a spreadsheet hiccup block payment.
+          try {
+            var fieldsObj = {};
+            formData.forEach(function (value, key) { fieldsObj[key] = value; });
+            fetch("/api/save-registration", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ _sheetTarget: sessionValue, fields: fieldsObj })
+            }).catch(function () { /* silent — this is a logging step only */ });
+          } catch (e) { /* ignore */ }
 
           return fetch("/api/create-checkout-v2", {
             method: "POST",
