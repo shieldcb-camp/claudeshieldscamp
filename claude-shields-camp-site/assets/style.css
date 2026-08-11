@@ -212,7 +212,17 @@ img { max-width: 100%; display: block; }
   margin: 0 auto;
   padding: 110px 24px 90px;
 }
-.hero-content h1 { color: #ffc72c; max-width: 760px; text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
+.hero-content h1 { color: var(--white); max-width: 760px; text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
+.hero-subhead {
+  display: block;
+  margin-top: 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.42em;
+}
 .hero-content p.lead {
   color: #eef5f1;
   font-size: 1.1rem;
