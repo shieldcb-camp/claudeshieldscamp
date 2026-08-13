@@ -174,12 +174,18 @@ async function getAccessToken() {
 }
 
 async function appendRow(sheetName, rowValues) {
-  const sheetId = process.env.GOOGLE_SHEET_ID;
+  let sheetId = process.env.GOOGLE_SHEET_ID || "";
+  // Defensive cleanup — strip stray whitespace/newlines and surrounding
+  // quotes, the same class of copy/paste mistake that bit the private key.
+  sheetId = sheetId.trim();
+  if ((sheetId.startsWith('"') && sheetId.endsWith('"')) || (sheetId.startsWith("'") && sheetId.endsWith("'"))) {
+    sheetId = sheetId.slice(1, -1).trim();
+  }
   if (!sheetId) throw new Error("Missing GOOGLE_SHEET_ID env var.");
 
   const accessToken = await getAccessToken();
   const range = encodeURIComponent(sheetName + "!A1");
-  const url = "https://sheets.googleapis.com/v4/spreadsheets/" + sheetId +
+  const url = "https://sheets.googleapis.com/v4/spreadsheets/" + encodeURIComponent(sheetId) +
     "/values/" + range + ":append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS";
 
   const res = await fetch(url, {
@@ -192,7 +198,16 @@ async function appendRow(sheetName, rowValues) {
   });
 
   if (!res.ok) {
-    throw new Error("Sheets append failed: " + (await res.text()));
+    const bodyText = await res.text();
+    console.error(
+      "save-registration: Sheets append failed.",
+      "status:", res.status,
+      "sheetId length:", sheetId.length,
+      "sheetId:", JSON.stringify(sheetId),
+      "sheetName:", sheetName,
+      "response (first 300 chars):", bodyText.slice(0, 300)
+    );
+    throw new Error("Sheets append failed (status " + res.status + "): " + bodyText.slice(0, 300));
   }
 }
 
