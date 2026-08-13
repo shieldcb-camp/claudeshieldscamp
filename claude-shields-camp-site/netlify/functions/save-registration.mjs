@@ -68,11 +68,43 @@ function base64url(input) {
 // dependency (like googleapis) is needed for something this small.
 async function getAccessToken() {
   const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const rawKey = process.env.GOOGLE_PRIVATE_KEY || "";
-  const key = rawKey.replace(/\\n/g, "\n");
+  let key = process.env.GOOGLE_PRIVATE_KEY || "";
 
   if (!email || !key) {
     throw new Error("Missing GOOGLE_SERVICE_ACCOUNT_EMAIL or GOOGLE_PRIVATE_KEY env vars.");
+  }
+
+  // Normalize the private key so it works no matter how it got pasted into
+  // Netlify's env var UI — this is the #1 source of "unsupported" decoder
+  // errors, since the raw text is easy to mangle in transit:
+  key = key.trim();
+
+  // 1) Strip a stray pair of surrounding quotes (happens when someone
+  //    copies the whole `"private_key": "..."` JSON value, quotes and all).
+  if ((key.startsWith('"') && key.endsWith('"')) || (key.startsWith("'") && key.endsWith("'"))) {
+    key = key.slice(1, -1);
+  }
+
+  // 2) Convert literal backslash-n sequences (and stray \r) into real
+  //    newlines. If the key already has real newlines, these are no-ops.
+  key = key.replace(/\\r\\n/g, "\n").replace(/\\n/g, "\n").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+
+  // 3) Repair "smart" quotes/dashes that rich-text apps (TextEdit, Word,
+  //    Notes, Pages) sometimes auto-substitute during copy/paste — these
+  //    silently break the "-----BEGIN PRIVATE KEY-----" header text.
+  key = key.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, "-");
+
+  key = key.trim();
+
+  if (!key.includes("-----BEGIN PRIVATE KEY-----") || !key.includes("-----END PRIVATE KEY-----")) {
+    // Safe diagnostics only — never logs the actual key contents.
+    console.error(
+      "save-registration: GOOGLE_PRIVATE_KEY doesn't look like a valid PEM key.",
+      "length:", key.length,
+      "starts with:", JSON.stringify(key.slice(0, 20)),
+      "ends with:", JSON.stringify(key.slice(-20))
+    );
+    throw new Error("GOOGLE_PRIVATE_KEY is not a valid PEM-formatted private key — check the Netlify env var value.");
   }
 
   const now = Math.floor(Date.now() / 1000);
@@ -86,7 +118,19 @@ async function getAccessToken() {
   };
 
   const unsigned = base64url(JSON.stringify(header)) + "." + base64url(JSON.stringify(claims));
-  const signature = crypto.sign("RSA-SHA256", Buffer.from(unsigned), key).toString("base64url");
+
+  let signature;
+  try {
+    signature = crypto.sign("RSA-SHA256", Buffer.from(unsigned), key).toString("base64url");
+  } catch (signErr) {
+    console.error(
+      "save-registration: crypto.sign failed.",
+      "key length:", key.length,
+      "line count:", key.split("\n").length,
+      "error:", String(signErr)
+    );
+    throw signErr;
+  }
   const jwt = unsigned + "." + signature;
 
   const res = await fetch("https://oauth2.googleapis.com/token", {
