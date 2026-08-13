@@ -7,14 +7,19 @@
 // registration/payment flow, since the email to Formspree is already
 // the authoritative save at that point.
 //
-// Requires three environment variables, set in the Netlify dashboard
+// Requires environment variables, set in the Netlify dashboard
 // (Site configuration → Environment variables) — never in this file:
-//   GOOGLE_SERVICE_ACCOUNT_EMAIL   the service account's "client_email"
-//   GOOGLE_PRIVATE_KEY             the service account's "private_key"
-//                                    (paste it with the \n characters intact —
-//                                    this code converts them to real newlines)
+//   GOOGLE_SERVICE_ACCOUNT_JSON    the ENTIRE contents of the downloaded
+//                                    service-account .json key file, pasted
+//                                    as-is (open the file, Select All, Copy,
+//                                    paste the whole thing as one value —
+//                                    this is the recommended method, since
+//                                    there's no substring to select wrong).
 //   GOOGLE_SHEET_ID                the long ID in your Google Sheet's URL,
 //                                    e.g. docs.google.com/spreadsheets/d/<THIS PART>/edit
+//
+// (Older setup, still supported as a fallback: separate
+// GOOGLE_SERVICE_ACCOUNT_EMAIL / GOOGLE_PRIVATE_KEY env vars.)
 //
 // See SETUP_INSTRUCTIONS.md section 3e for the one-time setup walkthrough
 // (creating the service account, sharing the sheet with it, etc).
@@ -62,42 +67,50 @@ function base64url(input) {
   return Buffer.from(input).toString("base64url");
 }
 
-// Exchanges the service account's private key for a short-lived Google
-// API access token. This is a standard OAuth2 "JWT bearer" flow, done
-// by hand here with Node's built-in crypto module so no extra npm
-// dependency (like googleapis) is needed for something this small.
-async function getAccessToken() {
+// Reads the service account's email + private key from env vars, preferring
+// the single-JSON-blob method (GOOGLE_SERVICE_ACCOUNT_JSON) since it can't
+// be partially/wrongly selected the way a raw PEM block can. Falls back to
+// the older split GOOGLE_SERVICE_ACCOUNT_EMAIL / GOOGLE_PRIVATE_KEY vars,
+// with defensive cleanup of common copy/paste corruption.
+function getServiceAccountCredentials() {
+  const jsonBlob = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
+
+  if (jsonBlob && jsonBlob.trim()) {
+    let parsed;
+    try {
+      parsed = JSON.parse(jsonBlob.trim());
+    } catch (err) {
+      console.error(
+        "save-registration: GOOGLE_SERVICE_ACCOUNT_JSON is not valid JSON.",
+        "length:", jsonBlob.length,
+        "starts with:", JSON.stringify(jsonBlob.trim().slice(0, 20)),
+        "ends with:", JSON.stringify(jsonBlob.trim().slice(-20))
+      );
+      throw new Error("GOOGLE_SERVICE_ACCOUNT_JSON is not valid JSON — paste the entire downloaded .json key file, unmodified.");
+    }
+    if (!parsed.client_email || !parsed.private_key) {
+      throw new Error("GOOGLE_SERVICE_ACCOUNT_JSON is missing client_email or private_key — paste the entire downloaded .json key file, unmodified.");
+    }
+    return { email: parsed.client_email, key: parsed.private_key };
+  }
+
+  // --- Fallback: older split-variable setup ---
   const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
   let key = process.env.GOOGLE_PRIVATE_KEY || "";
 
   if (!email || !key) {
-    throw new Error("Missing GOOGLE_SERVICE_ACCOUNT_EMAIL or GOOGLE_PRIVATE_KEY env vars.");
+    throw new Error("Missing Google credentials — set GOOGLE_SERVICE_ACCOUNT_JSON (recommended) or GOOGLE_SERVICE_ACCOUNT_EMAIL + GOOGLE_PRIVATE_KEY.");
   }
 
-  // Normalize the private key so it works no matter how it got pasted into
-  // Netlify's env var UI — this is the #1 source of "unsupported" decoder
-  // errors, since the raw text is easy to mangle in transit:
   key = key.trim();
-
-  // 1) Strip a stray pair of surrounding quotes (happens when someone
-  //    copies the whole `"private_key": "..."` JSON value, quotes and all).
   if ((key.startsWith('"') && key.endsWith('"')) || (key.startsWith("'") && key.endsWith("'"))) {
     key = key.slice(1, -1);
   }
-
-  // 2) Convert literal backslash-n sequences (and stray \r) into real
-  //    newlines. If the key already has real newlines, these are no-ops.
   key = key.replace(/\\r\\n/g, "\n").replace(/\\n/g, "\n").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-
-  // 3) Repair "smart" quotes/dashes that rich-text apps (TextEdit, Word,
-  //    Notes, Pages) sometimes auto-substitute during copy/paste — these
-  //    silently break the "-----BEGIN PRIVATE KEY-----" header text.
   key = key.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, "-");
-
   key = key.trim();
 
   if (!key.includes("-----BEGIN PRIVATE KEY-----") || !key.includes("-----END PRIVATE KEY-----")) {
-    // Safe diagnostics only — never logs the actual key contents.
     console.error(
       "save-registration: GOOGLE_PRIVATE_KEY doesn't look like a valid PEM key.",
       "length:", key.length,
@@ -106,6 +119,16 @@ async function getAccessToken() {
     );
     throw new Error("GOOGLE_PRIVATE_KEY is not a valid PEM-formatted private key — check the Netlify env var value.");
   }
+
+  return { email, key };
+}
+
+// Exchanges the service account's private key for a short-lived Google
+// API access token. This is a standard OAuth2 "JWT bearer" flow, done
+// by hand here with Node's built-in crypto module so no extra npm
+// dependency (like googleapis) is needed for something this small.
+async function getAccessToken() {
+  const { email, key } = getServiceAccountCredentials();
 
   const now = Math.floor(Date.now() / 1000);
   const header = { alg: "RS256", typ: "JWT" };
