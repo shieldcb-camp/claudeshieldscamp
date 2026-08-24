@@ -125,6 +125,15 @@ document.addEventListener("DOMContentLoaded", function () {
       var nameField = document.getElementById("name");
       var camperName = nameField ? nameField.value : "";
 
+      // One ID per submission, shared between the sheet row and the Stripe
+      // Checkout Session — this is how stripe-webhook.mjs finds the right
+      // row to mark "Paid" once payment actually completes. Falls back to
+      // a timestamp+random string on the rare browser without
+      // crypto.randomUUID (older Safari/iOS versions).
+      var registrationId = (window.crypto && window.crypto.randomUUID)
+        ? window.crypto.randomUUID()
+        : "reg-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+
       function showFailure(message) {
         alert(message || "Something went wrong submitting the form. Please try again or email cbshields@peace.edu.");
         submitBtn.textContent = originalText;
@@ -185,14 +194,14 @@ document.addEventListener("DOMContentLoaded", function () {
             fetch("/api/save-registration", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ _sheetTarget: sessionValue, fields: fieldsObj })
+              body: JSON.stringify({ _sheetTarget: sessionValue, fields: fieldsObj, registrationId: registrationId })
             }).catch(function () { /* silent — this is a logging step only */ });
           } catch (e) { /* ignore */ }
 
           return fetch("/api/create-checkout-v2", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ session: sessionValue, camperName: camperName })
+            body: JSON.stringify({ session: sessionValue, camperName: camperName, registrationId: registrationId })
           });
         })
         .then(function (response) { return response.json().then(function (data) { return { ok: response.ok, data: data }; }); })
@@ -216,6 +225,80 @@ document.addEventListener("DOMContentLoaded", function () {
             setSuccessMessage("Thanks! We've saved your info, but couldn't start payment automatically. Please contact cbshields@peace.edu to complete your registration.", null);
           }
         });
+    });
+  }
+
+  /* -------------------------------------------------------------
+     CAMP LIFE PHOTO LIGHTBOX
+     The homepage only shows a handful of gallery thumbnails, but
+     every photo (thumbnailed or not) lives in this array so visitors
+     can arrow through the full album once they open one. Keep this
+     list in sync with data-index attributes in index.html's
+     .gallery-item buttons if photos are ever added/removed/reordered.
+     ------------------------------------------------------------- */
+  var campLifePhotos = [
+    { src: "assets/photos/IMG_4652.jpg", alt: "Full camp team photo" },
+    { src: "assets/photos/DSC03893.jpg", alt: "Coach huddled up with players" },
+    { src: "assets/photos/IMG_0896.jpg", alt: "Campers doing a line drill" },
+    { src: "assets/photos/IMG_0885.jpg", alt: "Campers with cucumber slices over their eyes at lunch" },
+    { src: "assets/photos/IMG_1269.jpg", alt: "Camper at lunch" },
+    { src: "assets/photos/IMG_0887.jpg", alt: "Camper dribbling in the hallway" },
+    { src: "assets/photos/camp-life-1.jpg", alt: "Coach Shields kneeling with a young camper on the court" },
+    { src: "assets/photos/camp-life-2.jpg", alt: "A group of campers posing with a coach" },
+    { src: "assets/photos/camp-life-3.jpg", alt: "Campers piled up celebrating together" },
+    { src: "assets/photos/camp-life-5.jpg", alt: "Camper striking a pose mid-drill" }
+  ];
+
+  var lightbox = document.getElementById("lightbox");
+  if (lightbox) {
+    var lightboxImg = document.getElementById("lightbox-img");
+    var lightboxCounter = document.getElementById("lightbox-counter");
+    var lightboxIndex = 0;
+
+    function showLightboxPhoto(index) {
+      lightboxIndex = (index + campLifePhotos.length) % campLifePhotos.length;
+      var photo = campLifePhotos[lightboxIndex];
+      lightboxImg.src = photo.src;
+      lightboxImg.alt = photo.alt;
+      lightboxCounter.textContent = (lightboxIndex + 1) + " / " + campLifePhotos.length;
+    }
+
+    function openLightbox(index) {
+      showLightboxPhoto(index);
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".gallery-item").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        openLightbox(parseInt(btn.dataset.index, 10) || 0);
+      });
+    });
+
+    var closeBtn = document.getElementById("lightbox-close");
+    var prevBtn = document.getElementById("lightbox-prev");
+    var nextBtn = document.getElementById("lightbox-next");
+    if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+    if (prevBtn) prevBtn.addEventListener("click", function () { showLightboxPhoto(lightboxIndex - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { showLightboxPhoto(lightboxIndex + 1); });
+
+    // Click the dark backdrop (but not the image itself) to close.
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!lightbox.classList.contains("is-open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") showLightboxPhoto(lightboxIndex - 1);
+      if (e.key === "ArrowRight") showLightboxPhoto(lightboxIndex + 1);
     });
   }
 
