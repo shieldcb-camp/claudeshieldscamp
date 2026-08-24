@@ -319,6 +319,24 @@ section { padding: 72px 0; }
   .gallery a:nth-child(1) img { height: 220px; }
 }
 
+/* Small facility-photo gallery (used in the homepage Camp Location section) */
+.location-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.location-gallery img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: var(--shadow-lg);
+  display: block;
+}
+.location-gallery a:nth-child(1) { grid-column: span 2; }
+.location-gallery a:nth-child(1) img { height: 260px; }
+.location-gallery a:nth-child(2) img,
+.location-gallery a:nth-child(3) img { height: 170px; }
+
 /* Session / pricing cards */
 .session-card {
   background: var(--white);
