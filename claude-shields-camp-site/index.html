@@ -262,15 +262,24 @@
       <h2>A look inside the week</h2>
     </div>
     <div class="gallery">
-      <a href="assets/photos/IMG_4652.jpg" target="_blank"><img src="assets/photos/IMG_4652.jpg" alt="Full camp team photo"></a>
-      <a href="assets/photos/DSC03893.jpg" target="_blank"><img src="assets/photos/DSC03893.jpg" alt="Coach huddled up with players"></a>
-      <a href="assets/photos/IMG_0896.jpg" target="_blank"><img src="assets/photos/IMG_0896.jpg" alt="Campers doing a line drill"></a>
-      <a href="assets/photos/IMG_0885.jpg" target="_blank"><img src="assets/photos/IMG_0885.jpg" alt="Campers with cucumber slices over their eyes at lunch"></a>
-      <a href="assets/photos/IMG_1269.jpg" target="_blank"><img src="assets/photos/IMG_1269.jpg" alt="Camper at lunch"></a>
-      <a href="assets/photos/IMG_0887.jpg" target="_blank"><img src="assets/photos/IMG_0887.jpg" alt="Camper dribbling in the hallway"></a>
+      <button type="button" class="gallery-item" data-index="0"><img src="assets/photos/IMG_4652.jpg" alt="Full camp team photo"></button>
+      <button type="button" class="gallery-item" data-index="6"><img src="assets/photos/camp-life-1.jpg" alt="Coach Shields kneeling with a young camper on the court"></button>
+      <button type="button" class="gallery-item" data-index="7"><img src="assets/photos/camp-life-2.jpg" alt="A group of campers posing with a coach"></button>
+      <button type="button" class="gallery-item" data-index="8"><img src="assets/photos/camp-life-3.jpg" alt="Campers piled up celebrating together"></button>
+      <button type="button" class="gallery-item" data-index="3"><img src="assets/photos/IMG_0885.jpg" alt="Campers with cucumber slices over their eyes at lunch"></button>
+      <button type="button" class="gallery-item" data-index="9"><img src="assets/photos/camp-life-5.jpg" alt="Camper striking a pose mid-drill"></button>
     </div>
+    <p class="small text-center" style="margin-top:16px;">Click any photo to flip through the full album.</p>
   </div>
 </section>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+  <button type="button" class="lightbox-arrow lightbox-prev" id="lightbox-prev" aria-label="Previous photo">&#10094;</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <button type="button" class="lightbox-arrow lightbox-next" id="lightbox-next" aria-label="Next photo">&#10095;</button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+</div>
 
 <section class="section-alt" id="contact">
   <div class="container grid-2">
