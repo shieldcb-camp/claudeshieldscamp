@@ -18,6 +18,12 @@ var EARLY_ENDS  = new Date("2027-01-31T23:59:59-05:00");
 var EARLY_PRICE = "$425";
 var REG_PRICE   = "$475";
 
+/* Elite Camp registration toggle. Set back to true to reopen it for a
+   future date — flip this one flag rather than hunting through the form
+   pages. elite-camp.html's CTA button/status text was updated by hand to
+   match this being closed; update that copy too if this ever flips back. */
+var ELITE_REGISTRATION_OPEN = false;
+
 function kidsPricingStatus() {
   var now = new Date();
   if (now < REG_OPENS) return { state: "not-open" };
@@ -106,10 +112,15 @@ document.addEventListener("DOMContentLoaded", function () {
        (i.e. does nothing on elite-registration.html).
        ----------------------------------------------------------- */
     var hasKidsSessionRadios = camperForm.querySelector('input[name="Session"][data-key="session-1"]');
+    var isEliteForm = camperForm.querySelector('input[name="Session"][data-key="elite"]');
     if (hasKidsSessionRadios && kidsPricingStatus().state === "not-open") {
       camperForm.style.display = "none";
       var closedEl = document.getElementById("form-closed");
       if (closedEl) closedEl.style.display = "block";
+    } else if (isEliteForm && !ELITE_REGISTRATION_OPEN) {
+      camperForm.style.display = "none";
+      var eliteClosedEl = document.getElementById("form-closed");
+      if (eliteClosedEl) eliteClosedEl.style.display = "block";
     }
 
     camperForm.addEventListener("submit", function (e) {
