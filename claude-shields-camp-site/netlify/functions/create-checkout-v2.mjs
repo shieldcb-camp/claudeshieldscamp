@@ -129,15 +129,25 @@ export default async (req) => {
 
   try {
     const origin = new URL(req.url).origin;
+
+    // registration_id metadata is only attached for Kids Camp sessions —
+    // that's what stripe-webhook.mjs uses to auto-update the sheet's Paid
+    // status. Elite Camp intentionally isn't wired into that system, so we
+    // leave its metadata exactly as before.
+    const metadata = {
+      camper_name: (body.camperName || "").slice(0, 200),
+      session: sessionKey
+    };
+    if (sessionKey === "session-1" || sessionKey === "session-2") {
+      metadata.registration_id = (body.registrationId || "").slice(0, 100);
+    }
+
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [{ price: priceId, quantity: 1 }],
       success_url: origin + "/payment-success.html",
       cancel_url: origin + (sessionKey === "elite" ? "/elite-registration.html" : "/camper-info.html"),
-      metadata: {
-        camper_name: (body.camperName || "").slice(0, 200),
-        session: sessionKey
-      }
+      metadata: metadata
     });
 
     return new Response(JSON.stringify({ url: checkoutSession.url }), {
