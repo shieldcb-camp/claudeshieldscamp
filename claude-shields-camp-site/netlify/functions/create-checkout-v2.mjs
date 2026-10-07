@@ -34,7 +34,7 @@ const PRICE_IDS = {
 
 // Same registration window as the rest of the site (kept in sync
 // manually with assets/script.js — see note in that file).
-const REG_OPENS  = new Date("2027-01-01T00:00:00-05:00");
+const REG_OPENS  = new Date("2026-01-01T00:00:00-05:00"); // TEST BRANCH ONLY
 const EARLY_ENDS = new Date("2027-01-31T23:59:59-05:00");
 
 // Kids Camp hard cap per session — Elite Camp has no cap enforced here.
