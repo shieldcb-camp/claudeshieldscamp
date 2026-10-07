@@ -25,10 +25,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // Stripe Dashboard under Product catalog → click the product → the
 // Price ID starts with "price_". See SETUP_INSTRUCTIONS.md section 3.
 const PRICE_IDS = {
-  session1Early:   "price_1U1BR3Hk8x31lRhsi7G53F1J",
-  session1Regular: "price_1U1BR5Hk8x31lRhsTQMKKNGi",
-  session2Early:   "price_1U1BR3Hk8x31lRhsR0tZ6ycW",
-  session2Regular: "price_1UNeIGHk8x31lRhsAbZ9hNwz",
+  session1Early:   "price_1UNxU7Hk8x31lRhs16kEaphZ",
+  session1Regular: "price_1UNxSwHk8x31lRhslLDqsqPB",
+  session2Early:   "price_1UNxUTHk8x31lRhsSqd59tQI",
+  session2Regular: "price_1UNxTaHk8x31lRhst7diJKS9",
   elite:           "price_1U1BR3Hk8x31lRhs60JXAT6l"
 };
 
