@@ -286,3 +286,54 @@ export async function markRowPaid(sheetName, registrationId, paidAtIso) {
 
   return true;
 }
+
+// Counts how many registrations in a sheet tab are marked "Paid" for a given
+// session, by reading the sheet itself. Used by create-checkout-v2.mjs to
+// enforce the per-session cap (Stripe has no search for Checkout Sessions).
+// The "Payment Status" and "Session" columns are found by header name, so
+// this keeps working if columns are ever reordered; if a header is missing it
+// falls back to the standard Kids Camp layout (C and L).
+// sessionPrefix is matched against the start of the Session cell, e.g.
+// "Session 1" matches "Session 1 — June 14-17, 2027".
+export async function countPaidRows(sheetName, sessionPrefix) {
+  const sheetId = resolveSheetId();
+  const accessToken = await getAccessToken();
+
+  const range = encodeURIComponent(sheetName + "!A1:AZ");
+  const url = "https://sheets.googleapis.com/v4/spreadsheets/" + encodeURIComponent(sheetId) +
+    "/values/" + range;
+
+  const res = await fetchWithRetry(url, {
+    headers: { Authorization: "Bearer " + accessToken }
+  }, "countPaidRows");
+
+  if (!res.ok) {
+    const bodyText = await res.text();
+    console.error(
+      "google-sheets: countPaidRows failed.",
+      "status:", res.status,
+      "sheetName:", sheetName,
+      "response (first 300 chars):", bodyText.slice(0, 300)
+    );
+    throw new Error("Sheets read failed (status " + res.status + "): " + bodyText.slice(0, 300));
+  }
+
+  const data = await res.json();
+  const rows = data.values || [];
+  if (rows.length === 0) return 0;
+
+  const header = rows[0].map((h) => String(h || "").trim().toLowerCase());
+  let statusCol = header.indexOf("payment status");
+  let sessionCol = header.indexOf("session");
+  if (statusCol === -1) statusCol = 2;
+  if (sessionCol === -1) sessionCol = 11;
+
+  let count = 0;
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i] || [];
+    const status = String(row[statusCol] || "").trim().toLowerCase();
+    const session = String(row[sessionCol] || "").trim();
+    if (status === "paid" && session.startsWith(sessionPrefix)) count++;
+  }
+  return count;
+}
