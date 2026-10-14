@@ -18,6 +18,7 @@
 //   STRIPE_SECRET_KEY = sk_live_... (or sk_test_... while testing)
 
 import Stripe from "stripe";
+import { countPaidRows } from "./lib/google-sheets.mjs";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -25,16 +26,16 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // Stripe Dashboard under Product catalog → click the product → the
 // Price ID starts with "price_". See SETUP_INSTRUCTIONS.md section 3.
 const PRICE_IDS = {
-  session1Early:   "price_1U1BR3Hk8x31lRhsi7G53F1J",
-  session1Regular: "price_1U1BR5Hk8x31lRhsTQMKKNGi",
-  session2Early:   "price_1U1BR3Hk8x31lRhsR0tZ6ycW",
-  session2Regular: "price_1UNeIGHk8x31lRhsAbZ9hNwz",
+  session1Early:   "price_1UNxU7Hk8x31lRhs16kEaphZ",
+  session1Regular: "price_1UNxSwHk8x31lRhslLDqsqPB",
+  session2Early:   "price_1UNxUTHk8x31lRhsSqd59tQI",
+  session2Regular: "price_1UNxTaHk8x31lRhst7diJKS9",
   elite:           "price_1U1BR3Hk8x31lRhs60JXAT6l"
 };
 
 // Same registration window as the rest of the site (kept in sync
 // manually with assets/script.js — see note in that file).
-const REG_OPENS  = new Date("2027-01-01T00:00:00-05:00");
+const REG_OPENS  = new Date("2026-01-01T00:00:00-05:00"); // TEST BRANCH ONLY
 const EARLY_ENDS = new Date("2027-01-31T23:59:59-05:00");
 
 // Kids Camp hard cap per session — Elite Camp has no cap enforced here.
@@ -45,7 +46,7 @@ const EARLY_ENDS = new Date("2027-01-31T23:59:59-05:00");
 // this function is called, that submission *is* their waitlist entry —
 // no separate waitlist form needed. Just re-check that inbox/spreadsheet
 // when a spot opens up.
-const KIDS_CAMP_CAP = 120;
+const KIDS_CAMP_CAP = 1; // TEST BRANCH ONLY (real value: 120)
 
 function priceIdForSession(sessionKey) {
   if (sessionKey === "elite") return PRICE_IDS.elite;
@@ -59,27 +60,15 @@ function priceIdForSession(sessionKey) {
   return null;
 }
 
-// Counts completed (paid) Checkout Sessions tagged with this session key,
-// regardless of which price tier (early/regular) they paid under. Stops
-// early once it reaches the cap — no need to keep paginating past that.
-// Note: Stripe's Search API has a short indexing delay (usually just a
-// few seconds), so there's a small chance two people right at the cap
-// boundary could both slip through — a minor, acceptable edge case, and
-// the same kind of overbooking risk any registration system has.
+// Counts paid registrations for a session by reading the registration sheet
+// (rows whose Payment Status is "Paid" -- the Stripe webhook flips rows to
+// Paid once a payment completes). Stripe's Search API doesn't cover Checkout
+// Sessions, so the sheet is the source of truth for how many spots are taken.
+// To reopen a spot (e.g. after a refund), change that row's Payment Status in
+// the sheet from "Paid" to anything else, such as "Refunded".
 async function countPaidRegistrations(sessionKey) {
-  let count = 0;
-  let page;
-  do {
-    const result = await stripe.checkout.sessions.search({
-      query: `status:'complete' AND metadata['session']:'${sessionKey}'`,
-      limit: 100,
-      page
-    });
-    count += result.data.length;
-    page = result.next_page;
-    if (count >= KIDS_CAMP_CAP) break;
-  } while (page);
-  return count;
+  const prefix = sessionKey === "session-1" ? "Session 1" : "Session 2";
+  return countPaidRows("Kids Camp Registrations", prefix);
 }
 
 export default async (req) => {
