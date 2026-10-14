@@ -13,7 +13,7 @@
    Registration opens Jan 1, 2027. Early bird runs through Jan 31;
    regular pricing applies Feb 1 onward. Runs on the visitor's
    local clock, so this updates itself automatically every year. */
-var REG_OPENS   = new Date("2027-01-01T00:00:00-05:00");
+var REG_OPENS   = new Date("2026-01-01T00:00:00-05:00"); // TEST BRANCH ONLY
 var EARLY_ENDS  = new Date("2027-01-31T23:59:59-05:00");
 var EARLY_PRICE = "$425";
 var REG_PRICE   = "$475";
